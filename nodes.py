@@ -104,7 +104,10 @@ class LoadMistoFluxControlNet:
         device=comfy.model_management.get_torch_device()
         misto_cn = load_misto_transoformer_cn(device=device)
         ckpt_path = os.path.join(dir_TheMistoModel, model_name)
-        state_dict = torch.load(ckpt_path, map_location='cpu')
+        if '.bin' in model_name:
+            state_dict = torch.load(ckpt_path, map_location='cpu')
+        else:
+            state_dict = load_file(ckpt_path)
         miss_, error_ = misto_cn.load_state_dict(state_dict,strict=False)
         misto_cn.eval()
         print(miss_, error_)
