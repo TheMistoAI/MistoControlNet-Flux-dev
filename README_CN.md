@@ -22,7 +22,7 @@ by TheMisto.ai @Shenzhen, China
 #### 不同类型的Lineart or scribble preprocessor
 测试参数:
 - Prompt: "Hyper-realistic 3D render of a classic Formula 1 race car, bright red with Marlboro and Agip logos, number 1, large black tires, dramatic studio lighting, dark moody background, reflective floor, cinematic atmosphere, Octane render style, high detail"
-- controlnet_strength: 0.65~0.8  (推荐：Anyline with 0.6~0.7)
+- controlnet_strength: 0.65-0.8  (推荐：Anyline with 0.6-0.7)
 - step: 30
 - guidance: 4.0 
 - 生成效果跟prompt质量成正相关关系，不同类型的线稿、轮廓使用的controlnet_strength也可能不同，多试一下！
@@ -74,7 +74,7 @@ please contact us.
 - Flux1.dev-MistoCN-collection  
 - Flux1.dev-Misto-IPAdapter  
 
-你的start是我们开源的动力！
+你的star是我们开源的动力！
 
 ## One more thing
 ![Product](assets/misto.png)  

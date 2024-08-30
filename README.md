@@ -1,7 +1,7 @@
 ![Intro Image](assets/open_source.png)
 [中文版-README](README_CN.md)
 ## Summary
-by TheMisto.ai @Shenzhen, China
+by TheMisto.ai @Shenzhen, China  
 This is a ControlNet network designed for any lineart or outline sketches, compatible with Flux1.dev. The ControlNet model parameters are approximately 1.4B.  
 
 This model is not compatible with XLabs loaders and samplers. Please use TheMisto.ai Flux ControlNet ComfyUI suite.
@@ -65,12 +65,10 @@ This model is for research and educational purposes only and may not be used for
 ## Business Cooperation
 For any custom model training, commercial cooperation, AI application development, or other business collaboration matters, please contact us.  
 
-- Business: info@themisto.ai
-- Investment: investment@themisto.ai
+- *Business:* info@themisto.ai
+- *Investment:* investment@themisto.ai
 We also welcome investors to inquire for more information.  
 
-Business Email: info@themisto.ai
-Investor Relations: investment@themisto.ai
 ## WIP
 - Flux1.dev-MistoCN-collection
 - Flux1.dev-Misto-IPAdapter  
@@ -91,6 +89,6 @@ Discord: https://discord.gg/fTyDB2CU
 X: https://x.com/AiThemisto79359  
 
 ### Mainland China (中国大陆):
-Website: https://themisto.ai/  
-WeChat Official Account: TheMisto AI (Shenzhen Mixed Tuple Technology Co., Ltd.)  
-Xiaohongshu: TheMisto.ai (Xiaohongshu ID: 4211745997)  
+*Website:* https://themisto.ai/  
+*WeChat Official Account:* TheMisto AI (Shenzhen Mixed Tuple Technology Co., Ltd.)  
+*Xiaohongshu:* TheMisto.ai (Xiaohongshu ID: 4211745997)  
