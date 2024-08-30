@@ -1,7 +1,7 @@
 ![Intro Image](assets/open_source.png)
 [中文版-README](README_CN.md)
 ## Summary
-by TheMisto.ai @Shenzhen, China
+by TheMisto.ai @Shenzhen, China  
 This is a ControlNet network designed for any lineart or outline sketches, compatible with Flux1.dev. The ControlNet model parameters are approximately 1.4B.  
 
 This model is not compatible with XLabs loaders and samplers. Please use TheMisto.ai Flux ControlNet ComfyUI suite.
