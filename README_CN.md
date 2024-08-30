@@ -74,7 +74,7 @@ please contact us.
 - Flux1.dev-MistoCN-collection  
 - Flux1.dev-Misto-IPAdapter  
 
-你的start是我们开源的动力！
+你的star是我们开源的动力！
 
 ## One more thing
 ![Product](assets/misto.png)  
