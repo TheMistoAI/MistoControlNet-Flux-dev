@@ -1,4 +1,12 @@
 ![Intro Image](assets/open_source.png)  
+## 非常重要
+<mark>!!!请更新ComfyUI套件至最新版本，修复了tensor mismatch问题   
+!!!不要使用Auto CFG来跟Ksampler配合使用，可能会导致非常糟糕的结果    
+!!!对controlnet strength和prompt非常敏感，请好好写prompt和从0.5的controlnet strength逐步尝试  
+!!!更新了一个工作流在./workflow文件夹中，从从这个工作流开始<mark>    
+
+![Intro Image](assets/example1.jpg)
+
 ## 概述
 by TheMisto.ai @Shenzhen, China  
 这是一个适用于任意线稿、轮廓用于Flux1.dev的ControlNet网络，本ControlNet参数约为1.4B。  

@@ -8,7 +8,7 @@ from safetensors.torch import load_file
 from einops import rearrange,repeat
 from .modules.misto_controlnet import MistoControlNetFluxDev
 from .modules.utils import get_schedule,get_noise,denoise_controlnet, unpack
-from PIL import Image,ImageOps
+import torch.nn.functional as F
 
 dir_TheMistoModel = os.path.join(folder_paths.models_dir, "TheMisto_model")
 os.makedirs(dir_TheMistoModel, exist_ok=True)
@@ -88,6 +88,33 @@ def load_misto_transoformer_cn(device):
     return controlnet
 
 
+def img_preprocessor(image, res):
+    _, _, h, w = image.shape
+
+    # 计算缩放比例
+    scale = res / min(h, w)
+
+    # 计算缩放后的尺寸
+    new_h, new_w = int(h * scale), int(w * scale)
+
+    # 等比例缩放
+    resized = F.interpolate(image, size=(new_h, new_w), mode='bilinear', align_corners=False)
+
+    # 计算最接近的能被16整除的尺寸
+    crop_h = int((new_h // 16) * 16)
+    crop_w = int((new_w // 16) * 16)
+
+    # 计算裁剪的起始位置
+    start_h = (new_h - crop_h) // 2
+    start_w = (new_w - crop_w) // 2
+
+    # 中心裁剪
+    cropped = resized[:, :, start_h:start_h + crop_h, start_w:start_w + crop_w]
+
+    return cropped
+
+
+
 class LoadMistoFluxControlNet:
     @classmethod
     def INPUT_TYPES(s):
@@ -118,24 +145,27 @@ class ApplyMistoFluxControlNet:
     def INPUT_TYPES(s):
         return {"required": {"controlnet": ("MistoFluxControlNet",),
                              "image": ("IMAGE",),
+                             "resolution":  ("INT", {"default":960, "min": 512, "max": 4096}),
                              "strength": ("FLOAT", {"default": 0.85, "min": 0.0, "max": 2.0, "step": 0.01})
                              }}
 
-    RETURN_TYPES = ("ControlNetCondition",)
-    RETURN_NAMES = ("controlnet_condition",)
+    RETURN_TYPES = ("ControlNetCondition","IMAGE")
+    RETURN_NAMES = ("controlnet_condition","cond_image")
     FUNCTION = "embedding"
     CATEGORY = "TheMistoAINodes"
 
-    def embedding(self, controlnet, image, strength):
-        device=comfy.model_management.get_torch_device()
+    def embedding(self, controlnet, image, resolution, strength):
         cond_img = torch.from_numpy((np.array(image) * 2) - 1)
-        cond_img = cond_img.permute(0, 3, 1, 2).to(torch.bfloat16).to(device)
+        cond_img = cond_img.permute(0, 3, 1, 2)
+        res_img = img_preprocessor(image=cond_img, res=resolution)
+        out_img = res_img.permute(0, 2, 3, 1)
+        out_img = (out_img + 1) / 2
         cond_out = {
-            "img": cond_img.to(device),
+            "img": res_img,
             "controlnet_strength": strength,
             "model": controlnet,
         }
-        return (cond_out,)
+        return (cond_out,out_img)
 
 
 class KSamplerTheMisto:
@@ -174,7 +204,7 @@ class KSamplerTheMisto:
 
         # cn cond
         cn_model = controlnet_condition['model']
-        cond_img = controlnet_condition['img']
+        cond_img = controlnet_condition['img'].to(torch.bfloat16).to(device)
         cn_strength =  controlnet_condition['controlnet_strength']
 
         bc, c, h, w = cond_img.shape
@@ -183,7 +213,7 @@ class KSamplerTheMisto:
         pbar.update(2)
         with torch.no_grad():
             # set scheduler
-            timesteps = get_schedule( steps,  (width // 8) * (height // 8) // (16 * 16), shift=True, )
+            timesteps = get_schedule( steps,  (width // 8) * (height // 8) // 4, shift=True, )
             x = get_noise( 1, height, width, device=device, dtype=dtype_model, seed=seed)
             p_inp_cond = prepare_sampling(positive[0][0], positive[0][1]['pooled_output'], img=x, batch_size=batch_size)
             n_inp_cond = prepare_sampling(negative[0][0], negative[0][1]['pooled_output'], img=x, batch_size=batch_size)
