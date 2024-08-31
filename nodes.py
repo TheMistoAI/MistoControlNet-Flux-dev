@@ -90,27 +90,14 @@ def load_misto_transoformer_cn(device):
 
 def img_preprocessor(image, res):
     _, _, h, w = image.shape
-
-    # 计算缩放比例
     scale = res / min(h, w)
-
-    # 计算缩放后的尺寸
     new_h, new_w = int(h * scale), int(w * scale)
-
-    # 等比例缩放
     resized = F.interpolate(image, size=(new_h, new_w), mode='bilinear', align_corners=False)
-
-    # 计算最接近的能被16整除的尺寸
     crop_h = int((new_h // 16) * 16)
     crop_w = int((new_w // 16) * 16)
-
-    # 计算裁剪的起始位置
     start_h = (new_h - crop_h) // 2
     start_w = (new_w - crop_w) // 2
-
-    # 中心裁剪
     cropped = resized[:, :, start_h:start_h + crop_h, start_w:start_w + crop_w]
-
     return cropped
 
 
