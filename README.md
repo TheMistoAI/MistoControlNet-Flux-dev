@@ -4,9 +4,13 @@
 <mark>!!!Please update the ComfyUI-suite for fixed the tensor mismatch promblem.  
 !!!please donot use AUTO cfg for our ksampler, it will have a very bad result.   
 !!!Strength and prompt senstive, be care for your prompt and try 0.5 as the starting controlnet strength
-!!!update a new example workflow in workflow folder, get start with it.<mark>  
+!!!update a new example workflow in workflow folder, get start with it.<mark> 
 
-![Intro Image](assets/example1.jpg)
+# New Update!
+We have just launched our latest product, Misto.
+The most powerful AI Mind Palace built for all designers.
+Warmly welcome everyone to try it out.
+Website: https://themisto.ai/  
 
 ## Summary
 by TheMisto.ai @Shenzhen, China  
@@ -74,21 +78,6 @@ This model is for research and educational purposes only and may not be used for
 For any custom model training, commercial cooperation, AI application development, or other business collaboration matters, please contact us.  
 
 - *Business:* info@themisto.ai
-- *Investment:* investment@themisto.ai
-We also welcome investors to inquire for more information.  
-
-## WIP
-- Flux1.dev-MistoCN-collection
-- Flux1.dev-Misto-IPAdapter  
-Your support is the driving force behind our open-source efforts!  
-
-## One more thing
-![Product](assets/misto.png) 
-We will soon be launching our own product: An extremely user-friendly multi-modal AI creative tool - [Misto]   
-Designed to rekindle the public's creative desire through the simplest and most inspiring experience.  
-Unleash creativity, expand the boundaries of imagination, and turn endless inspiration into reality!  
-
-Supported Platforms: All Platforms
 
 ## Media
 ### International:
