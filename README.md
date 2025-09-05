@@ -2,7 +2,9 @@
 We have just launched our latest product, Misto.
 The most powerful AI Mind Palace built for all designers.
 Warmly welcome everyone to try it out.
-Website: https://themisto.ai/  
+
+### Website here: https://themisto.ai/
+
 ![Result2](assets/misto.png)  
 
 [中文版-README](README_CN.md)
